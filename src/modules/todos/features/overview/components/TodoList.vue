@@ -1,3 +1,10 @@
+<script lang="ts">
+</script>
+
+<template>
+  <div />
+</template>
+
 <!-- <script lang="ts" setup>
 import type { TodoIndex } from '@/models/todo/index/todoIndex.model'
 

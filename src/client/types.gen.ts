@@ -209,7 +209,7 @@ export enum Theme {
 }
 
 export type UpdatePreferencesCommand = {
-    theme: Theme;
+    theme?: Theme;
     language?: string;
     fontSize?: string;
     showShortcuts?: boolean;

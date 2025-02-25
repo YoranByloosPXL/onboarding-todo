@@ -7,6 +7,7 @@ import {
   createTodoControllerCreateTodoV1,
   getTodosControllerGetTodosV1,
 } from '@/client'
+import type { TodoCreateDto } from '@/models/todo/create/todoCreateDto.model'
 import type { TodoIndex } from '@/models/todo/index/todoIndex.model'
 import type { TodoIndexFilters } from '@/models/todo/index/todoIndexFilters.model'
 import {
@@ -17,11 +18,9 @@ import { ObjectUtil } from '@/utils/object.util.ts'
 import { PaginationDtoBuilder } from '@/utils/paginationDtoBuilder.util'
 
 export class TodoService {
-  static async create(roleName: string): Promise<void> {
+  static async create(todoDto: TodoCreateDto): Promise<void> {
     await createTodoControllerCreateTodoV1({
-      body: {
-        name: roleName,
-      },
+      body: todoDto,
     })
   }
 

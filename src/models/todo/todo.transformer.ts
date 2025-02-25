@@ -30,7 +30,7 @@ export class TodoCreateTransformer {
   static toDto(form: TodoCreateForm): TodoCreateDto {
     return {
       title: form.title,
-      deadline: form.deadline,
+      deadline: form.deadline ? form.deadline.toString() : null,
       description: form.description,
     }
   }
