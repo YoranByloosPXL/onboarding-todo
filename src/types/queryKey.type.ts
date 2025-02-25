@@ -10,6 +10,9 @@ interface ProjectQueryKeys {
     userUuid: ComputedRef<string | null>
   }
   roles: void
+  todoIndex: {
+    paginationOptions?: ComputedRef<PaginationOptions<UserIndexFilters>>
+  }
   userDetail: {
     userUuid: ComputedRef<UserUuid>
   }
