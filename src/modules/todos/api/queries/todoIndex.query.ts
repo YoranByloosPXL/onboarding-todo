@@ -10,8 +10,7 @@ import type { ComputedRef } from 'vue'
 
 import type { TodoIndex } from '@/models/todo/index/todoIndex.model'
 import type { TodoIndexFilters } from '@/models/todo/index/todoIndexFilters.model'
-
-import { TodoService } from '../services/todo.service'
+import { TodoService } from '@/modules/todos/api/services/todo.service'
 
 export function useTodoIndexQuery(
   paginationOptions: ComputedRef<PaginationOptions<TodoIndexFilters>>,
