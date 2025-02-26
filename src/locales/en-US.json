@@ -134,6 +134,25 @@
   "validation.too_small_string": "Must be at least {count} character | Must be at least {count} characters",
   "validation.unauthorized": "Unauthorized",
   "todo": {
-    "notodo": "No todos found"
+    "notodo": "No todos found",
+    "newtodo": "+",
+    "close": "Close",
+    "submit": "Submit"
+  },
+  "module": {
+    "todos": {
+      "create": {
+        "new": {
+          "title": "Create new todo",
+          "dialog": {
+            "title": "New todo",
+            "description": "Create new todo item"
+          }
+        }
+      },
+      "title": "Title",
+      "description": "Description",
+      "deadline": "Deadline"
+    }
   }
 }

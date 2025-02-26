@@ -134,6 +134,25 @@
   "validation.too_small_string": "Moet minstens {count} teken bevatten | Moet minstens {count} tekens bevatten",
   "validation.unauthorized": "Ongeautoriseerd",
   "todo": {
-    "notodo": "Geen todos gevonden"
+    "notodo": "Geen todos gevonden",
+    "newtodo": "+",
+    "close": "Annuleer",
+    "submit": "Maak"
+  },
+  "module": {
+    "todos": {
+      "create": {
+        "new": {
+          "title": "Maak nieuwe todo aan",
+          "dialog": {
+            "title": "Nieuwe todo",
+            "description": "Maak nieuwe todo aan"
+          }
+        }
+      },
+      "title": "Titel",
+      "description": "Beschrijving",
+      "deadline": "Deadline"
+    }
   }
 }
