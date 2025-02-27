@@ -1,13 +1,11 @@
-import { z } from 'zod'
+import type { TodoUuid } from '@/models/todo/todoUuid.model'
 
-export const todoIndexSchema = z.object({
-  uuid: z.string().uuid(),
-  title: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-  completed: z.boolean(),
-  deadline: z.date().nullable(),
-  description: z.string(),
-})
-
-export type TodoIndex = z.infer<typeof todoIndexSchema>
+export interface TodoIndex {
+  uuid: TodoUuid
+  title: string
+  createdAt: Date
+  updatedAt: Date
+  completed: boolean
+  deadline: Date | null
+  description: string
+}

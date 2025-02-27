@@ -137,7 +137,11 @@
     "notodo": "Geen todos gevonden",
     "newtodo": "+",
     "close": "Annuleer",
-    "submit": "Maak"
+    "submit": "Maak",
+    "edit": "Bewerk",
+    "list": {
+      "title": "Mijn todo's"
+    }
   },
   "module": {
     "todos": {
@@ -154,5 +158,9 @@
       "description": "Beschrijving",
       "deadline": "Deadline"
     }
+  },
+  "shared": {
+    "delete": "Verwijder",
+    "save": "Opslaan"
   }
 }
