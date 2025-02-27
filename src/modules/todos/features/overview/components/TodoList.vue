@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { VcCheckbox, VcIcon } from '@wisemen/vue-core'
+import {
+  useDialog,
+  VcButton,
+  VcCheckbox,
+} from '@wisemen/vue-core'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -12,12 +16,25 @@ const props = defineProps<{
   todoList: TodoIndex[] | null
 }>()
 
-const hasTodos = computed<boolean>(() => props.todoList && props.todoList.length > 0)
+const dialog = useDialog({
+  component: () => import('@/modules/todos/features/overview/components/TodoDialog.vue'),
+})
+
+function onEditTodo(todo: TodoIndex): void {
+  const formattedTodo = {
+    ...todo,
+    deadline: formatDate(todo.deadline),
+  }
+
+  void dialog.open({ uuid: todo.uuid, todo: formattedTodo })
+}
+
+const hasTodos = computed<boolean>(() => props.todoList !== null && props.todoList.length > 0)
 const i18n = useI18n()
 
-function formatDate(date: string | null): void {
+function formatDate(date: Date | null): string {
   if (!date) {
-    return i18n.t('todo.noDeadline')
+    return ''
   }
 
   return new Date(date).toLocaleDateString()
@@ -39,19 +56,20 @@ function formatDate(date: string | null): void {
     >
       {{ i18n.t('todo.notodo') }}
     </p>
-
     <ul
       v-else
       class="space-y-4"
     >
+      <h1 class="text-xl font-bold text-gray-900 mb-6 ml-100 mt-10">
+        {{ i18n.t('todo.list.title') }}
+      </h1>
       <li
         v-for="todo in todoList"
         :key="todo.uuid"
-        class="p-4 bg-white shadow rounded-lg border border-gray-200 flex items-center justify-between ml-100 mr-100 mt-5"
+        class="bg-blue p-4 shadow rounded-lg border border-gray-200 flex items-center justify-between ml-100 mr-100 mb-5"
       >
         <div class="flex items-start gap-3">
-          <!-- Checkbox voor status -->
-          <VcCheckbox :checked="todo.status === 'done'" />
+          <VcCheckbox :checked="todo.completed" />
 
           <div>
             <h3 class="font-semibold text-lg">
@@ -62,16 +80,19 @@ function formatDate(date: string | null): void {
             </p>
 
             <div class="flex items-center text-sm text-gray-400 mt-2">
-              <VcIcon
-                name="calendar"
-                class="mr-1"
-              />
               <span :class="{ 'text-red-500': !todo.deadline }">
                 {{ formatDate(todo.deadline) }}
               </span>
             </div>
           </div>
         </div>
+        <VcButton
+          variant="secondary"
+          icon="edit"
+          @click="onEditTodo(todo)"
+        >
+          {{ i18n.t('todo.edit') }}
+        </VcButton>
       </li>
     </ul>
   </div>

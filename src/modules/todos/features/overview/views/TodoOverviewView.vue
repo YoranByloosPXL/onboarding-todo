@@ -12,7 +12,7 @@ import { useTodoIndexQuery } from '@/modules/todos/api/queries/todoIndex.query'
 import TodoList from '@/modules/todos/features/overview/components/TodoList.vue'
 
 const dialog = useDialog({
-  component: () => import('@/modules/todos/features/overview/components/TodoCreateDialog.vue'),
+  component: () => import('@/modules/todos/features/overview/components/TodoDialog.vue'),
 })
 
 function onButtonClick(): void {
@@ -43,19 +43,19 @@ const i18n = useI18n()
 
     <div
       v-else
-      class="flex flex-col gap-lg flex-1">
+      class="flex flex-col gap-lg flex-1"
+    >
       <TodoList
         v-if="!isLoading"
-        :todo-list="todoIndexQuery.data.value.data ?? []"
+        :todo-list="todoIndexQuery.data.value?.data ?? []"
         :is-loading="isLoading"
         :error="error"
       />
     </div>
 
-    <!-- Nieuwe Todo Knop (Rechts onder) -->
-    <div class="fixed bottom-6 right-6">
+    <div class="fixed bottom-10 right-10">
       <VcButton
-        class="shadow-lg border-r-2"
+        class="shadow-lg border-r-2 bg-black border-black"
         @click="onButtonClick()"
       >
         {{ i18n.t("todo.newtodo") }}

@@ -137,10 +137,20 @@
     "notodo": "No todos found",
     "newtodo": "+",
     "close": "Close",
-    "submit": "Submit"
+    "submit": "Submit",
+    "edit": "Edit",
+    "list": {
+      "title": "My to do's"
+    }
   },
   "module": {
     "todos": {
+      "edit": {
+        "dialog": {
+          "title": "Edit todo",
+          "description": "Edit your todo item"
+        }
+      },
       "create": {
         "new": {
           "title": "Create new todo",
@@ -154,5 +164,9 @@
       "description": "Description",
       "deadline": "Deadline"
     }
+  },
+  "shared": {
+    "delete": "Delete",
+    "save": "Save"
   }
 }
