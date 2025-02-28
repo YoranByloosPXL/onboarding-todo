@@ -46,7 +46,7 @@ const i18n = useI18n()
       class="flex flex-col gap-lg flex-1">
       <TodoList
         v-if="!isLoading"
-        :todo-list="todoIndexQuery.data.value.data ?? []"
+        :todo-list="todoIndexQuery.data.value?.data ?? []"
         :is-loading="isLoading"
         :error="error"
       />
@@ -58,7 +58,7 @@ const i18n = useI18n()
         class="shadow-lg border-r-2"
         @click="onButtonClick()"
       >
-        {{ i18n.t("todo.newtodo") }}
+        {{ i18n.t("todo.new_todo") }}
       </VcButton>
     </div>
   </div>

@@ -15,9 +15,9 @@ const props = defineProps<{
 const hasTodos = computed<boolean>(() => props.todoList && props.todoList.length > 0)
 const i18n = useI18n()
 
-function formatDate(date: string | null): void {
+function formatDate(date: string | null): string {
   if (!date) {
-    return i18n.t('todo.noDeadline')
+    return ''
   }
 
   return new Date(date).toLocaleDateString()
@@ -37,7 +37,7 @@ function formatDate(date: string | null): void {
       v-else-if="!hasTodos"
       class="text-center text-gray-500"
     >
-      {{ i18n.t('todo.notodo') }}
+      {{ i18n.t('todo.no_todo') }}
     </p>
 
     <ul
@@ -63,7 +63,7 @@ function formatDate(date: string | null): void {
 
             <div class="flex items-center text-sm text-gray-400 mt-2">
               <VcIcon
-                name="calendar"
+                icon="calendar"
                 class="mr-1"
               />
               <span :class="{ 'text-red-500': !todo.deadline }">
