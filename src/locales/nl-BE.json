@@ -134,6 +134,12 @@
   "validation.too_small_string": "Moet minstens {count} teken bevatten | Moet minstens {count} tekens bevatten",
   "validation.unauthorized": "Ongeautoriseerd",
   "todo": {
-    "notodo": "Geen todos gevonden"
+    "no_todo": "Geen todos gevonden",
+    "page": {
+      "title": "Mijn todo's"
+    },
+    "list": {
+      "loading": "Laden..."
+    }
   }
 }

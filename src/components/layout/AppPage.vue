@@ -34,7 +34,6 @@ const hasTabsSlot = computed<boolean>(() => slots.tabs !== undefined)
           :items="props.breadcrumbs"
           class="-ml-xxs"
         />
-
         <div class="flex min-h-10 items-center justify-between">
           <h1
             :data-test-id="TEST_ID.APP_PAGE.TITLE"
