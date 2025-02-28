@@ -1,61 +1,76 @@
-<script setup lang="ts">
-import { usePagination } from '@wisemen/vue-core'
+<script setup lang="ts" generic="TQueries">
+import { VcSkeletonItem } from '@wisemen/vue-core'
+import type { UseQueryReturnType } from '@wisemen/vue-core-query'
 import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import AppErrorState from '@/components/app/error-state/AppErrorState.vue'
-import AppPage from '@/components/layout/AppPage.vue'
-import { useTodoIndexQuery } from '@/modules/todos/api/queries/todoIndex.query'
-import TodoList from '@/modules/todos/features/overview/components/TodoList.vue'
+
+const props = defineProps<{
+  queries: {
+    [KQuery in keyof TQueries]: UseQueryReturnType<TQueries[KQuery]>
+  }
+}>()
+
+const isLoading = computed<boolean>(() => {
+  for (const key in props.queries) {
+    if (props.queries[key].isLoading.value as boolean) {
+      return true
+    }
+  }
+
+  return false
+})
 
 interface ApiError {
   message: string
   status: number
 }
 
-const pagination = usePagination({
-  isRouteQueryEnabled: true,
-  key: 'todos',
-})
-
-const todoIndexQuery = useTodoIndexQuery(pagination.paginationOptions)
-
-const isLoading = computed<boolean>(() => todoIndexQuery.isLoading.value)
-
 const error = computed<ApiError | null>(() => {
-  const err = todoIndexQuery.error.value
+  for (const key in props.queries) {
+    const error = props.queries[key].error.value
 
-  if (err !== null && err instanceof Error && 'message' in err && 'status' in err) {
-    return {
-      message: err.message as string,
-      status: (err as any).status as number,
+    if (error !== null && error instanceof TypeError && 'message' in error && 'status' in error) {
+      return {
+        message: error.message as string,
+        status: error.status as number,
+      }
+    }
+    else if (error !== null) {
+      throw error
     }
   }
 
   return null
 })
 
-const i18n = useI18n()
+const data = computed<{
+  [KQuery in keyof TQueries]: TQueries[KQuery]
+}>(() => {
+  const data = {} as any
+
+  for (const key in props.queries) {
+    data[key] = props.queries[key].data.value
+  }
+
+  return data
+})
 </script>
 
 <template>
-  <AppPage :title="i18n.t('todo.page.title')">
-    <p v-if="isLoading">
-      {{ i18n.t('todo.list.loading') }}
-    </p>
+  <!-- TODO: page skeleton -->
+  <VcSkeletonItem v-if="isLoading" />
+
+  <div
+    v-else-if="error !== null"
+    class="flex flex-1 items-center justify-center"
+  >
     <AppErrorState
-      v-else-if="error !== null"
       :error="error"
     />
-    <div
-      v-else
-      class="flex flex-col gap-lg flex-1"
-    >
-      <TodoList
-        :todo-list="todoIndexQuery.data.value?.data ?? []"
-        :is-loading="isLoading"
-        :error="error"
-      />
-    </div>
-  </AppPage>
+  </div>
+
+  <template v-else>
+    <slot :data="data" />
+  </template>
 </template>

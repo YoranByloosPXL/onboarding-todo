@@ -8,6 +8,11 @@ import AppPage from '@/components/layout/AppPage.vue'
 import { useTodoIndexQuery } from '@/modules/todos/api/queries/todoIndex.query'
 import TodoList from '@/modules/todos/features/overview/components/TodoList.vue'
 
+interface ApiError {
+  message: string
+  status: number
+}
+
 const pagination = usePagination({
   isRouteQueryEnabled: true,
   key: 'todos',
@@ -16,7 +21,18 @@ const pagination = usePagination({
 const todoIndexQuery = useTodoIndexQuery(pagination.paginationOptions)
 
 const isLoading = computed<boolean>(() => todoIndexQuery.isLoading.value)
-const error = computed<unknown>(() => todoIndexQuery.error.value)
+const error = computed<ApiError | null>(() => {
+  const err = todoIndexQuery.error.value
+
+  if (err !== null && err instanceof Error && 'message' in err && 'status' in err) {
+    return {
+      message: err.message as string,
+      status: (err as any).status as number,
+    }
+  }
+
+  return null
+})
 
 const i18n = useI18n()
 </script>
