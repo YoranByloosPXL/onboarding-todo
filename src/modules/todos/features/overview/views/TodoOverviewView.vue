@@ -1,32 +1,60 @@
-<script lang="ts">
-</script>
-
-<template>
-  <div />
-</template>
-
-<!-- <script lang="ts" setup>
-import type { PaginationOptions } from '@wisemen/vue-core'
+<script setup lang="ts">
+import { usePagination } from '@wisemen/vue-core'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-import type { TodoIndexFilters } from '@/models/todo/index/todoIndexFilters.model'
+import AppErrorState from '@/components/app/error-state/AppErrorState.vue'
+import AppPage from '@/components/layout/AppPage.vue'
 import { useTodoIndexQuery } from '@/modules/todos/api/queries/todoIndex.query'
 import TodoList from '@/modules/todos/features/overview/components/TodoList.vue'
 
-const paginationOptions = computed<PaginationOptions<TodoIndexFilters>>(() => ({
-  filters: {},
-  page: 1,
-  perPage: 10,
-}))
+interface ApiError {
+  message: string
+  status: number
+}
 
-const { isLoading, data } = useTodoIndexQuery(paginationOptions)
+const pagination = usePagination({
+  isRouteQueryEnabled: true,
+  key: 'todos',
+})
+
+const todoIndexQuery = useTodoIndexQuery(pagination.paginationOptions)
+
+const isLoading = computed<boolean>(() => todoIndexQuery.isLoading.value)
+const error = computed<ApiError | null>(() => {
+  const err = todoIndexQuery.error.value
+
+  if (err !== null && err instanceof Error && 'message' in err && 'status' in err) {
+    return {
+      message: err.message as string,
+      status: (err as any).status as number,
+    }
+  }
+
+  return null
+})
+
+const i18n = useI18n()
 </script>
 
 <template>
-  <div>
-    <TodoList
-      :todo-list="data?.items ?? null"
-      :is-loading="isLoading"
+  <AppPage :title="i18n.t('todo.page.title')">
+    <p v-if="isLoading">
+      {{ i18n.t('todo.list.loading') }}
+    </p>
+    <AppErrorState
+      v-else-if="error !== null"
+      :error="error"
     />
-  </div>
-</template> -->
+    <div
+      v-else
+      class="flex flex-col gap-lg flex-1"
+    >
+      <TodoList
+        :todo-list="todoIndexQuery.data.value?.data ?? []"
+        :is-loading="isLoading"
+        :error="error"
+      />
+    </div>
+  </AppPage>
+</template>
