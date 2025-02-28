@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-import { VcDialog, VcTextField } from '@wisemen/vue-core'
+import {
+  useToast,
+  VcDateField,
+  VcDialog,
+  VcTextField,
+} from '@wisemen/vue-core'
 import { useForm } from 'formango'
 import { useI18n } from 'vue-i18n'
 
@@ -19,6 +24,7 @@ const emit = defineEmits<{
 }>()
 const i18n = useI18n()
 const apiErrorToast = useApiErrorToast()
+const toast = useToast()
 const todoCreateMutation = useTodoCreateMutation()
 const form = useForm({
   schema: todoCreateFormSchema,
@@ -26,6 +32,9 @@ const form = useForm({
     try {
       await todoCreateMutation.execute({
         body: values,
+      })
+      toast.success({
+        message: i18n.t('module.todos.create.success'),
       })
       onClose()
     }
@@ -56,7 +65,7 @@ function onClose(): void {
             :label="i18n.t('module.todos.title')"
             v-bind="toFormField(title)"
           />
-          <VcTextField
+          <VcDateField
             :label="i18n.t('module.todos.deadline')"
             v-bind="toFormField(deadline)"
           />

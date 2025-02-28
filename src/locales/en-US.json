@@ -133,14 +133,14 @@
   "validation.too_small_number": "Must be greater than or equal to {count}",
   "validation.too_small_string": "Must be at least {count} character | Must be at least {count} characters",
   "validation.unauthorized": "Unauthorized",
-  "todo.no_todo": "No todos found",
-  "todo.new_todo": "+",
-  "todo.close": "Close",
-  "todo.submit": "Submit",
+  "module.todos.not_found": "No todos found",
+  "module.todos.list.loading": "Loading...",
+  "module.todos.page.title": "My to do's",
   "module.todos.create.new.title": "Create new todo",
   "module.todos.create.new.dialog.title": "New todo",
   "module.todos.create.new.dialog.description": "Create new todo item",
   "module.todos.title": "Title",
   "module.todos.description": "Description",
-  "module.todos.deadline": "Deadline"
+  "module.todos.deadline": "Deadline",
+  "module.todos.create.success": "Created todo"
 }
