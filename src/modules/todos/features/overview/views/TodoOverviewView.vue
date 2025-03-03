@@ -12,18 +12,14 @@ import AppPage from '@/components/layout/AppPage.vue'
 import { useTodoIndexQuery } from '@/modules/todos/api/queries/todoIndex.query'
 import TodoList from '@/modules/todos/features/overview/components/TodoList.vue'
 
-const dialog = useDialog({
-  component: () => import('@/modules/todos/features/overview/components/TodoCreateDialog.vue'),
-})
-
-function onAddButtonClick(): void {
-  void dialog.open({})
-}
-
 interface ApiError {
   message: string
   status: number
 }
+
+const dialog = useDialog({
+  component: () => import('@/modules/todos/features/overview/components/TodoCreateDialog.vue'),
+})
 
 const pagination = usePagination({
   isRouteQueryEnabled: true,
@@ -48,6 +44,10 @@ const error = computed<ApiError | null>(() => {
 })
 
 const i18n = useI18n()
+
+function onAddButtonClick(): void {
+  void dialog.open({})
+}
 </script>
 
 <template>
@@ -71,7 +71,7 @@ const i18n = useI18n()
     </div>
     <div class="fixed bottom-6 right-6">
       <VcIconButton
-        class="bg-gray-600 border-gray-600"
+        class="button-add"
         icon="plus"
         label="Add todo button"
         @click="onAddButtonClick()"

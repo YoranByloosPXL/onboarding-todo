@@ -142,5 +142,13 @@
   "module.todos.title": "Titel",
   "module.todos.description": "Beschrijving",
   "module.todos.deadline": "Deadline",
-  "module.todos.create.success": "Todo aangemaakt"
+  "module.todos.create.success": "Todo aangemaakt",
+  "module": {
+    "auth": {
+      "login": {
+        "forgot_password": "Wachtwoord vergeten",
+        "sign_in_zitadel": "Log in met je Google account"
+      }
+    }
+  }
 }

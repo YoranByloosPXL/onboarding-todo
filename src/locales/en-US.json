@@ -142,5 +142,15 @@
   "module.todos.title": "Title",
   "module.todos.description": "Description",
   "module.todos.deadline": "Deadline",
-  "module.todos.create.success": "Created todo"
+  "module.todos.create.success": "Created todo",
+  "module": {
+    "auth": {
+      "login": {
+        "forgot_password": "Forgot password",
+        "sign_in_zitadel": "Sign in with Google",
+        "no_account": "Don't have an account yet?",
+        "create_account": "Create one!"
+      }
+    }
+  }
 }
