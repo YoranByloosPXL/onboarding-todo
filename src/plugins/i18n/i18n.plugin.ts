@@ -26,6 +26,7 @@ const localStorageValue = localStorage.getItem('locale')
 
 export const i18nPlugin = createI18n({
   fallbackLocale: defaultLocale,
+  flatJson: true,
   legacy: false,
   locale: localStorageValue ?? defaultLocale,
   messages,

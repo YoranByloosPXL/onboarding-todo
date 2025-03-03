@@ -24,7 +24,7 @@ export const routes = [
         name: 'index',
         path: '',
         redirect: {
-          name: 'user-overview',
+          name: 'todo-list',
         },
       },
       /**

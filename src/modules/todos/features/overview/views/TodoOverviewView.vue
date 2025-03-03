@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { usePagination } from '@wisemen/vue-core'
+import {
+  useDialog,
+  usePagination,
+  VcIconButton,
+} from '@wisemen/vue-core'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -13,6 +17,10 @@ interface ApiError {
   status: number
 }
 
+const dialog = useDialog({
+  component: () => import('@/modules/todos/features/overview/components/TodoCreateDialog.vue'),
+})
+
 const pagination = usePagination({
   isRouteQueryEnabled: true,
   key: 'todos',
@@ -21,6 +29,7 @@ const pagination = usePagination({
 const todoIndexQuery = useTodoIndexQuery(pagination.paginationOptions)
 
 const isLoading = computed<boolean>(() => todoIndexQuery.isLoading.value)
+
 const error = computed<ApiError | null>(() => {
   const err = todoIndexQuery.error.value
 
@@ -35,12 +44,16 @@ const error = computed<ApiError | null>(() => {
 })
 
 const i18n = useI18n()
+
+function onAddButtonClick(): void {
+  void dialog.open({})
+}
 </script>
 
 <template>
-  <AppPage :title="i18n.t('todo.page.title')">
+  <AppPage :title="i18n.t('module.todos.page.title')">
     <p v-if="isLoading">
-      {{ i18n.t('todo.list.loading') }}
+      {{ i18n.t('module.todos.list.loading') }}
     </p>
     <AppErrorState
       v-else-if="error !== null"
@@ -54,6 +67,14 @@ const i18n = useI18n()
         :todo-list="todoIndexQuery.data.value?.data ?? []"
         :is-loading="isLoading"
         :error="error"
+      />
+    </div>
+    <div class="fixed bottom-6 right-6">
+      <VcIconButton
+        class="button-add"
+        icon="plus"
+        label="Add todo button"
+        @click="onAddButtonClick()"
       />
     </div>
   </AppPage>
