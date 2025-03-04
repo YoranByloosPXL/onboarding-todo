@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import {
+  useToast,
   VcButton,
   VcDateField,
   VcDialog,
@@ -17,6 +18,7 @@ import FormSubmitButton from '@/components/form/FormSubmitButton.vue'
 import { useApiErrorToast } from '@/composables/api-error-toast/apiErrorToast.composable.ts'
 import { toFormField } from '@/helpers/formango.helper'
 import { todoCreateFormSchema } from '@/models/todo/create/todoCreateForm.model'
+import type { TodoIndex } from '@/models/todo/index/todoIndex.model'
 import type { TodoUuid } from '@/models/todo/todoUuid.model'
 import { useTodoCreateMutation } from '@/modules/todos/api/mutations/todoCreate.mutation'
 import { useTodoDeleteMutation } from '@/modules/todos/api/mutations/todoDelete.mutation'
@@ -24,11 +26,7 @@ import { useTodoUpdateMutation } from '@/modules/todos/api/mutations/todoUpdate.
 
 const props = defineProps<{
   uuid?: TodoUuid
-  todo?: {
-    title: string
-    deadline: string
-    description: string
-  }
+  todoIndex: TodoIndex
 }>()
 
 const emit = defineEmits<{
@@ -37,6 +35,7 @@ const emit = defineEmits<{
 
 const i18n = useI18n()
 const apiErrorToast = useApiErrorToast()
+const toast = useToast()
 const todoCreateMutation = useTodoCreateMutation()
 const todoUpdateMutation = useTodoUpdateMutation()
 const todoDeleteMutation = useTodoDeleteMutation()
@@ -50,14 +49,20 @@ const form = useForm({
           body: values,
           params: { todoUuid: props.uuid },
         })
+        toast.success({
+          message: i18n.t('module.todos.create.success'),
+        })
+        onClose()
       }
       else {
         await todoCreateMutation.execute({
           body: values,
         })
+        toast.success({
+          message: i18n.t('module.todos.create.success'),
+        })
+        onClose()
       }
-
-      onClose()
     }
     catch (error) {
       apiErrorToast.show(error)

@@ -133,32 +133,17 @@
   "validation.too_small_number": "Moet groter dan of gelijk aan {count} zijn",
   "validation.too_small_string": "Moet minstens {count} teken bevatten | Moet minstens {count} tekens bevatten",
   "validation.unauthorized": "Ongeautoriseerd",
-  "todo": {
-    "notodo": "Geen todos gevonden",
-    "newtodo": "+",
-    "close": "Annuleer",
-    "submit": "Maak",
-    "edit": "Bewerk",
-    "list": {
-      "title": "Mijn todo's"
-    }
-  },
-  "module": {
-    "todos": {
-      "create": {
-        "new": {
-          "title": "Maak nieuwe todo aan",
-          "dialog": {
-            "title": "Nieuwe todo",
-            "description": "Maak nieuwe todo aan"
-          }
-        }
-      },
-      "title": "Titel",
-      "description": "Beschrijving",
-      "deadline": "Deadline"
-    }
-  },
+  "module.todos.not_foudn": "Geen todos gevonden",
+  "module.todos.list.loading": "Laden...",
+  "module.todos.page.title": "Mijn todo's",
+  "module.todos.create.new.title": "Maak nieuwe todo aan",
+  "module.todos.create.new.dialog.title": "Nieuwe todo",
+  "module.todos.create.new.dialog.description": "Maak nieuwe todo aan",
+  "module.todos.title": "Titel",
+  "module.todos.description": "Beschrijving",
+  "module.todos.deadline": "Deadline",
+  "module.todos.create.success": "Todo aangemaakt",
+  "module.todos.edit": "Bewerk",
   "shared": {
     "delete": "Verwijder",
     "save": "Opslaan"

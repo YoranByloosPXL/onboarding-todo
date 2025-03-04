@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 import type { TodoCreateDto } from '@/models/todo/create/todoCreateDto.model'
 import type { TodoCreateForm } from '@/models/todo/create/todoCreateForm.model'
 import type { TodoIndex } from '@/models/todo/index/todoIndex.model'
@@ -7,14 +9,6 @@ import type { TodoIndexFiltersDto } from '@/models/todo/index/todoIndexFiltersDt
 import type { TodoUuid } from '@/models/todo/todoUuid.model'
 import type { TodoUpdateForm } from '@/models/todo/update/todoUpdateForm.model'
 import type { TodoUpdateDto } from '@/models/todo/update/todoUpdateModel.model'
-
-function formatDateToYYYYMMDD(date: Date): string {
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-
-  return `${year}-${month}-${day}`
-}
 
 export class TodoTransformer {
   static fromDto(dto: TodoIndexDto): TodoIndex {
@@ -29,11 +23,11 @@ export class TodoTransformer {
     }
   }
 
-  static toDto(todo: TodoUpdateForm): TodoUpdateDto {
+  static toDto(form: TodoUpdateForm): TodoUpdateDto {
     return {
-      title: todo.title,
-      deadline: todo.deadline ? formatDateToYYYYMMDD(todo.deadline) : null,
-      description: todo.description,
+      title: form.title,
+      deadline: form.deadline ? dayjs(form.deadline).format('YYYY-MM-DD') : null,
+      description: form.description,
     }
   }
 }
@@ -48,7 +42,7 @@ export class TodoCreateTransformer {
   static toDto(form: TodoCreateForm): TodoCreateDto {
     return {
       title: form.title,
-      deadline: form.deadline ? formatDateToYYYYMMDD(form.deadline) : null,
+      deadline: form.deadline ? dayjs(form.deadline).format('YYYY-MM-DD') : null,
       description: form.description,
     }
   }

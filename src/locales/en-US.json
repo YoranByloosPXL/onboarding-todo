@@ -133,38 +133,17 @@
   "validation.too_small_number": "Must be greater than or equal to {count}",
   "validation.too_small_string": "Must be at least {count} character | Must be at least {count} characters",
   "validation.unauthorized": "Unauthorized",
-  "todo": {
-    "notodo": "No todos found",
-    "newtodo": "+",
-    "close": "Close",
-    "submit": "Submit",
-    "edit": "Edit",
-    "list": {
-      "title": "My to do's"
-    }
-  },
-  "module": {
-    "todos": {
-      "edit": {
-        "dialog": {
-          "title": "Edit todo",
-          "description": "Edit your todo item"
-        }
-      },
-      "create": {
-        "new": {
-          "title": "Create new todo",
-          "dialog": {
-            "title": "New todo",
-            "description": "Create new todo item"
-          }
-        }
-      },
-      "title": "Title",
-      "description": "Description",
-      "deadline": "Deadline"
-    }
-  },
+  "module.todos.not_found": "No todos found",
+  "module.todos.list.loading": "Loading...",
+  "module.todos.page.title": "My to do's",
+  "module.todos.create.new.title": "Create new todo",
+  "module.todos.create.new.dialog.title": "New todo",
+  "module.todos.create.new.dialog.description": "Create new todo item",
+  "module.todos.title": "Title",
+  "module.todos.description": "Description",
+  "module.todos.deadline": "Deadline",
+  "module.todos.create.success": "Created todo",
+  "module.todos.edit": "Edit",
   "shared": {
     "delete": "Delete",
     "save": "Save"
