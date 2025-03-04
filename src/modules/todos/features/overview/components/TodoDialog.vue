@@ -4,15 +4,15 @@ import {
   VcButton,
   VcDateField,
   VcDialog,
+  VcTextarea,
   VcTextField,
 } from '@wisemen/vue-core'
 import { useForm } from 'formango'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import AppDialogActionCancel from '@/components/app/dialog/AppDialogActionCancel.vue'
 import AppDialogActions from '@/components/app/dialog/AppDialogActions.vue'
 import AppDialogContent from '@/components/app/dialog/AppDialogContent.vue'
-import AppDialogHeader from '@/components/app/dialog/AppDialogHeader.vue'
 import AppForm from '@/components/form/AppForm.vue'
 import FormSubmitButton from '@/components/form/FormSubmitButton.vue'
 import { useApiErrorToast } from '@/composables/api-error-toast/apiErrorToast.composable.ts'
@@ -26,7 +26,7 @@ import { useTodoUpdateMutation } from '@/modules/todos/api/mutations/todoUpdate.
 
 const props = defineProps<{
   uuid?: TodoUuid
-  todoIndex: TodoIndex
+  todoIndex?: TodoIndex
 }>()
 
 const emit = defineEmits<{
@@ -70,6 +70,11 @@ const form = useForm({
   },
 })
 
+const dialogTitle = computed<string>(() => {
+  return props.uuid
+    ? i18n.t('module.todo.edit.dialog.title')
+    : i18n.t('module.todos.create.new.dialog.title')
+})
 const title = form.register('title')
 const deadline = form.register('deadline')
 const description = form.register('description')
@@ -96,32 +101,30 @@ async function onDelete(): Promise<void> {
 <template>
   <VcDialog @close="onClose">
     <AppDialogContent class="w-dialog-sm">
-      <AppDialogHeader
-        :title="i18n.t(props.uuid ? 'module.todos.edit.dialog.title' : 'module.todos.create.new.dialog.title')"
-        :description="i18n.t(props.uuid ? 'module.todos.edit.dialog.description' : 'module.todos.create.new.dialog.description')"
-      />
+      <h1 class="text-xl font-bold">
+        {{ dialogTitle }}
+      </h1>
       <div class="py-4">
         <AppForm :form="form">
           <VcTextField
             :label="i18n.t('module.todos.title')"
+            class="text-field-dialog pb-2xl"
             v-bind="toFormField(title)"
+          />
+          <VcTextarea
+            :label="i18n.t('module.todos.description')"
+            v-bind="toFormField(description)"
+            class="textarea-dialog pb-2xl"
           />
           <VcDateField
             :label="i18n.t('module.todos.deadline')"
+            class="text-field-dialog"
             v-bind="toFormField(deadline)"
           />
-          <VcTextField
-            :label="i18n.t('module.todos.description')"
-            v-bind="toFormField(description)"
-          />
-          <AppDialogActions>
-            <AppDialogActionCancel
-              :label="i18n.t('shared.cancel')"
-              @click="onClose"
-            />
+          <AppDialogActions class="flex justify-between">
             <VcButton
               v-if="props.uuid"
-              variant="destructive-secondary"
+              class="button-delete flex-1 border-2 font-bold"
               @click="onDelete"
             >
               {{ i18n.t('shared.delete') }}
@@ -129,6 +132,7 @@ async function onDelete(): Promise<void> {
             <FormSubmitButton
               :form="form"
               :label="i18n.t('shared.save')"
+              class="flex-1"
             />
           </AppDialogActions>
         </AppForm>

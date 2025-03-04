@@ -3,12 +3,12 @@ import { defineStyleConfig } from '@wisemen/vue-core'
 defineStyleConfig({
   colorScheme: '*',
   config: {
-    '--icon-button-bg-color-active': '#475161',
-    '--icon-button-bg-color-default': '#475161',
-    '--icon-button-bg-color-hover': '#596373',
-    '--icon-button-border-color-active': '#475161',
-    '--icon-button-border-color-default': '#475161',
-    '--icon-button-border-color-hover': '#596373',
+    '--icon-button-bg-color-active': 'var(--bg-brand-solid)',
+    '--icon-button-bg-color-default': 'var(--bg-brand-solid)',
+    '--icon-button-bg-color-hover': 'var(--bg-brand-solid-hover)',
+    '--icon-button-border-color-active': 'var(--bg-brand-solid)1',
+    '--icon-button-border-color-default': 'var(--bg-brand-solid)',
+    '--icon-button-border-color-hover': 'var(--bg-brand-solid-hover)',
   },
   theme: '*',
   variant: 'add',

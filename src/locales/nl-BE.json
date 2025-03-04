@@ -104,7 +104,6 @@
   "shared.cancel": "Annuleer",
   "shared.close": "Sluiten",
   "shared.edit": "Bewerken",
-  "shared.save": "Maak aan",
   "user.birth_date": "Geboortedatum",
   "user.first_name": "Voornaam",
   "user.label.plural": "Gebruikers",
@@ -135,17 +134,17 @@
   "validation.unauthorized": "Ongeautoriseerd",
   "module.todos.not_foudn": "Geen todos gevonden",
   "module.todos.list.loading": "Laden...",
-  "module.todos.page.title": "Mijn todo's",
+  "module.todos.page.title": "Mijn to do's",
   "module.todos.create.new.title": "Maak nieuwe todo aan",
-  "module.todos.create.new.dialog.title": "Nieuwe todo",
+  "module.todos.create.new.dialog.title": "Nieuwe to do",
   "module.todos.create.new.dialog.description": "Maak nieuwe todo aan",
+  "module.todo.edit.dialog.title": "Mijn to do",
+  "module.todo.edit.dialog.description": "Bewerk bestaande todo item",
   "module.todos.title": "Titel",
-  "module.todos.description": "Beschrijving",
+  "module.todos.description": "Opmerking",
   "module.todos.deadline": "Deadline",
   "module.todos.create.success": "Todo aangemaakt",
-  "module.todos.edit": "Bewerk",
-  "shared": {
-    "delete": "Verwijder",
-    "save": "Opslaan"
-  }
+  "module.todos.edit": "...",
+  "shared.delete": "Verwijder to do",
+  "shared.save": "Opslaan"
 }

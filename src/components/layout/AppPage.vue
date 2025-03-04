@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import type { BreadcrumbItem } from '@wisemen/vue-core'
-import { VcBreadcrumbs } from '@wisemen/vue-core'
+import { VcBreadcrumbs, VcIconButton } from '@wisemen/vue-core'
 import { computed, useSlots } from 'vue'
 
 import AppContainer from '@/components/layout/AppContainer.vue'
-import { TEST_ID } from '@/constants/testId.constant.ts'
+import { usePreferences } from '@/composables/preference/preferences.composable.ts'
+import { useAuthStore } from '@/stores/auth.store'
 
 const props = withDefaults(
   defineProps<{
-    title: string
+    title?: string
     breadcrumbs?: BreadcrumbItem[]
   }>(),
   {
@@ -16,14 +17,22 @@ const props = withDefaults(
   },
 )
 
-const slots = useSlots()
+usePreferences()
 
+const authStore = useAuthStore()
+const slots = useSlots()
 const hasTabsSlot = computed<boolean>(() => slots.tabs !== undefined)
+
+function onSignOut(): void {
+  const logoutUrl = authStore.getLogoutUrl()
+
+  window.location.replace(logoutUrl)
+}
 </script>
 
 <template>
   <main class="flex w-full flex-1 flex-col">
-    <header class="bg-primary z-10 sticky top-0">
+    <header class="bg-brand-primary z-10 sticky top-0">
       <AppContainer
         :class="[
           hasTabsSlot ? 'pt-xl pb-0' : 'py-xl',
@@ -34,20 +43,14 @@ const hasTabsSlot = computed<boolean>(() => slots.tabs !== undefined)
           :items="props.breadcrumbs"
           class="-ml-xxs"
         />
-        <div class="flex min-h-10 items-center justify-between">
-          <h1
-            :data-test-id="TEST_ID.APP_PAGE.TITLE"
-            class="text-display-xs font-semibold text-primary"
-          >
-            {{ props.title }}
-          </h1>
-
-          <div
-            id="header-actions"
-            class="flex items-center justify-end gap-xl"
-          >
-            <slot name="header-actions" />
-          </div>
+        <div class="flex min-h-6 items-center justify-between">
+          <span />
+          <VcIconButton
+            class="bg-transparent border-transparent"
+            icon="logout"
+            label="Logout"
+            @click="onSignOut()"
+          />
         </div>
 
         <div

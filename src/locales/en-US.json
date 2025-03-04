@@ -104,7 +104,7 @@
   "shared.cancel": "Cancel",
   "shared.close": "Close",
   "shared.edit": "Edit",
-  "shared.save": "Create",
+  "shared.save": "Save",
   "user.birth_date": "Birthdate",
   "user.first_name": "First name",
   "user.label.plural": "Users",
@@ -139,13 +139,12 @@
   "module.todos.create.new.title": "Create new todo",
   "module.todos.create.new.dialog.title": "New todo",
   "module.todos.create.new.dialog.description": "Create new todo item",
+  "module.todo.edit.dialog.title": "Bewerk todo",
+  "module.todo.edit.dialog.description": "Bewerk bestaande todo item",
   "module.todos.title": "Title",
   "module.todos.description": "Description",
   "module.todos.deadline": "Deadline",
   "module.todos.create.success": "Created todo",
-  "module.todos.edit": "Edit",
-  "shared": {
-    "delete": "Delete",
-    "save": "Save"
-  }
+  "module.todos.edit": "...",
+  "shared.delete": "Delete"
 }
