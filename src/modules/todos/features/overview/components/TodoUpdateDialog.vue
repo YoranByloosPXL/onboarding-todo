@@ -18,10 +18,9 @@ import { useApiErrorToast } from '@/composables/api-error-toast/apiErrorToast.co
 import { toFormField } from '@/helpers/formango.helper'
 import type { TodoIndex } from '@/models/todo/index/todoIndex.model'
 import type { TodoUuid } from '@/models/todo/todoUuid.model'
+import { todoUpdateFormSchema } from '@/models/todo/update/todoUpdateForm.model'
 import { useTodoDeleteMutation } from '@/modules/todos/api/mutations/todoDelete.mutation'
 import { useTodoUpdateMutation } from '@/modules/todos/api/mutations/todoUpdate.mutation'
-
-import { todoUpdateFormSchema } from '../../../../../models/todo/update/todoUpdateForm.model'
 
 const props = defineProps<{
   uuid: TodoUuid

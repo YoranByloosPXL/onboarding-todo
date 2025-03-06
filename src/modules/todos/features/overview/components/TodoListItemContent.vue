@@ -6,7 +6,6 @@ import { DateFormatUtil } from '@/utils/date.util'
 
 const props = defineProps<{
   todo: {
-    title: string
     deadline: Date | null
     description: string
   }
@@ -16,10 +15,7 @@ const i18n = useI18n()
 </script>
 
 <template>
-  <div class="flex-grow">
-    <h1 class="font-semibold text-lg p-0 m-0">
-      {{ props.todo.title }}
-    </h1>
+  <div class="ml-4xl">
     <p class="text-sm text-gray-500">
       {{ props.todo.description }}
     </p>

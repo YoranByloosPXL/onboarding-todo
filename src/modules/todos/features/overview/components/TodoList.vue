@@ -10,8 +10,9 @@ const props = defineProps<{
   todoList: TodoIndex[] | null
 }>()
 
-const hasTodos = computed<boolean>(() => props.todoList !== null && props.todoList.length > 0)
 const i18n = useI18n()
+
+const hasTodos = computed<boolean>(() => props.todoList !== null && props.todoList.length > 0)
 </script>
 
 <template>
