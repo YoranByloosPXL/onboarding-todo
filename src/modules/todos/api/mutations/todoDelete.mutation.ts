@@ -2,8 +2,7 @@ import type { UseMutationReturnType } from '@wisemen/vue-core-query'
 import { useMutation } from '@wisemen/vue-core-query'
 
 import type { TodoUuid } from '@/models/todo/todoUuid.model'
-
-import { TodoService } from '../services/todo.service'
+import { TodoService } from '@/modules/todos/api/services/todo.service'
 
 export function useTodoDeleteMutation(): UseMutationReturnType<TodoUuid, void> {
   return useMutation<TodoUuid, void>({

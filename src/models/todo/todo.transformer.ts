@@ -7,8 +7,8 @@ import type { TodoIndexDto } from '@/models/todo/index/todoIndexDto.model'
 import type { TodoIndexFilters } from '@/models/todo/index/todoIndexFilters.model'
 import type { TodoIndexFiltersDto } from '@/models/todo/index/todoIndexFiltersDto'
 import type { TodoUuid } from '@/models/todo/todoUuid.model'
+import type { TodoUpdateDto } from '@/models/todo/update/todoUpdateDto.model'
 import type { TodoUpdateForm } from '@/models/todo/update/todoUpdateForm.model'
-import type { TodoUpdateDto } from '@/models/todo/update/todoUpdateModel.model'
 
 export class TodoTransformer {
   static fromDto(dto: TodoIndexDto): TodoIndex {

@@ -5,7 +5,6 @@ import {
 
 const props = defineProps<{
   title: string
-  description?: string
 }>()
 </script>
 

@@ -18,7 +18,7 @@ interface ApiError {
 }
 
 const dialog = useDialog({
-  component: () => import('@/modules/todos/features/overview/components/TodoDialog.vue'),
+  component: () => import('@/modules/todos/features/overview/components/TodoCreateDialog.vue'),
 })
 
 const pagination = usePagination({
@@ -51,22 +51,20 @@ function onAddButtonClick(): void {
 </script>
 
 <template>
-  <AppPage class="w-full">
-    <div class="w-120 m-auto">
-      <p v-if="isLoading">
-        {{ i18n.t('module.todos.list.loading') }}
-      </p>
-      <AppErrorState
-        v-else-if="error !== null"
-        :error="error"
-      />
-      <TodoList
-        v-if="!isLoading"
-        :todo-list="todoIndexQuery.data.value?.data ?? []"
-        :is-loading="isLoading"
-        :error="error"
-      />
-    </div>
+  <AppPage>
+    <p v-if="isLoading">
+      {{ i18n.t('module.todos.list.loading') }}
+    </p>
+    <AppErrorState
+      v-else-if="error !== null"
+      :error="error"
+    />
+    <TodoList
+      v-if="!isLoading"
+      :todo-list="todoIndexQuery.data.value?.data ?? []"
+      :is-loading="isLoading"
+      :error="error"
+    />
     <div class="fixed bottom-5xl right-5xl">
       <VcIconButton
         icon="plus"

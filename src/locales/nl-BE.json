@@ -144,7 +144,13 @@
   "module.todos.description": "Opmerking",
   "module.todos.deadline": "Deadline",
   "module.todos.create.success": "Todo aangemaakt",
+  "module.todos.update.success": "Todo bewerkt",
   "module.todos.edit": "...",
+  "module.todos.label.calender": "Kalender icoon",
+  "module.todos.label.edit": "Bewerk to do",
+  "module.todos.label.delete": "Verwijder to do",
+  "module.todos.label.dots": "Puntjes icoon",
+  "module.todos.delete.toast": "To do verwijderd",
   "shared.delete": "Verwijder to do",
   "shared.save": "Opslaan"
 }

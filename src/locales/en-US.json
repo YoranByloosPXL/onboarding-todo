@@ -145,6 +145,12 @@
   "module.todos.description": "Description",
   "module.todos.deadline": "Deadline",
   "module.todos.create.success": "Created todo",
+  "module.todos.update.success": "Updated todo",
   "module.todos.edit": "...",
+  "module.todos.label.calender": "Calender icon",
+  "module.todos.label.edit": "Edit to do",
+  "module.todos.label.delete": "Delete to do",
+  "module.todos.label.dots": "Three dots icon",
+  "module.todos.delete.toast": "Successfully deleted to do",
   "shared.delete": "Delete"
 }
