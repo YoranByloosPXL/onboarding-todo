@@ -78,11 +78,11 @@ function onClose(): void {
             class="text-field-dialog"
             v-bind="toFormField(deadline)"
           />
-          <AppDialogActions class="flex justify-end">
+          <AppDialogActions>
             <FormSubmitButton
               :form="form"
               :label="i18n.t('shared.save')"
-              class="flex-1"
+              class="w-full"
             />
           </AppDialogActions>
         </AppForm>
