@@ -133,13 +133,18 @@
   "validation.too_small_number": "Moet groter dan of gelijk aan {count} zijn",
   "validation.too_small_string": "Moet minstens {count} teken bevatten | Moet minstens {count} tekens bevatten",
   "validation.unauthorized": "Ongeautoriseerd",
-  "todo": {
-    "no_todo": "Geen todos gevonden",
-    "page": {
-      "title": "Mijn todo's"
-    },
-    "list": {
-      "loading": "Laden..."
-    }
-  }
+  "module.todos.not_foudn": "Geen todos gevonden",
+  "module.todos.list.loading": "Laden...",
+  "module.todos.page.title": "Mijn todo's",
+  "module.todos.create.new.title": "Maak nieuwe todo aan",
+  "module.todos.create.new.dialog.title": "Nieuwe todo",
+  "module.todos.create.new.dialog.description": "Maak nieuwe todo aan",
+  "module.todos.title": "Titel",
+  "module.todos.description": "Beschrijving",
+  "module.todos.deadline": "Deadline",
+  "module.todos.create.success": "Todo aangemaakt",
+  "module.auth.login.forgot_password": "Wachtwoord vergeten",
+  "module.auth.login.sign_in_zitadel": "Log in met je Google account",
+  "module.auth.login.no_account": "Nog geen account gemaakt?",
+  "module.auth.login.create_account": "Maak één!"
 }

@@ -3,37 +3,34 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import type { TodoIndex } from '@/models/todo/index/todoIndex.model'
+import TodoListItem from '@/modules/todos/features/overview/components/TodoListItem.vue'
 
 const props = defineProps<{
   isLoading: boolean
   todoList: TodoIndex[] | null
 }>()
 
-const hasTodos = computed<boolean>(() => props.todoList !== null && props.todoList.length > 0)
-
 const i18n = useI18n()
+
+const hasTodos = computed<boolean>(() => props.todoList !== null && props.todoList.length > 0)
 </script>
 
 <template>
   <p
-    v-if="!hasTodos"
+    v-if="hasTodos === false"
     class="m-lg text-center text-gray-500"
   >
-    {{ i18n.t('todo.no_todo') }}
+    {{ i18n.t('module.todos.not_found') }}
   </p>
 
   <ul
     v-else
-    class="space-y-2"
+    class="space-y-4"
   >
-    <li
+    <TodoListItem
       v-for="todo in todoList"
       :key="todo.uuid"
-      class="p-lg m-xl bg-white shadow rounded-lg border border-gray-200"
-    >
-      <h1 class="font-semibold text-lg">
-        {{ todo.title }}
-      </h1>
-    </li>
+      :todo="todo"
+    />
   </ul>
 </template>

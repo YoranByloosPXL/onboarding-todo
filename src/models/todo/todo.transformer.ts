@@ -1,10 +1,11 @@
+import dayjs from 'dayjs'
+
+import type { TodoCreateDto } from '@/models/todo/create/todoCreateDto.model'
+import type { TodoCreateForm } from '@/models/todo/create/todoCreateForm.model'
 import type { TodoIndex } from '@/models/todo/index/todoIndex.model'
 import type { TodoIndexDto } from '@/models/todo/index/todoIndexDto.model'
-
-import type { TodoCreateDto } from './create/todoCreateDto.model'
-import type { TodoCreateForm } from './create/todoCreateForm.model'
-import type { TodoIndexFilters } from './index/todoIndexFilters.model'
-import type { TodoIndexFiltersDto } from './index/todoIndexFiltersDto'
+import type { TodoIndexFilters } from '@/models/todo/index/todoIndexFilters.model'
+import type { TodoIndexFiltersDto } from '@/models/todo/index/todoIndexFiltersDto'
 
 export class TodoTransformer {
   static fromDto(dto: TodoIndexDto): TodoIndex {
@@ -30,7 +31,7 @@ export class TodoCreateTransformer {
   static toDto(form: TodoCreateForm): TodoCreateDto {
     return {
       title: form.title,
-      deadline: form.deadline ? form.deadline.toString() : null,
+      deadline: form.deadline ? dayjs(form.deadline).format('YYYY-MM-DD') : null,
       description: form.description,
     }
   }

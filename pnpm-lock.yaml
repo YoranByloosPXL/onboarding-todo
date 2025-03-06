@@ -8919,8 +8919,6 @@ snapshots:
       '@putout/operator-filesystem': 5.4.0(putout@37.22.0(eslint@9.19.0(jiti@2.4.2))(typescript@5.7.3))
       '@putout/operator-json': 2.2.0
       putout: 37.22.0(eslint@9.19.0(jiti@2.4.2))(typescript@5.7.3)
-    transitivePeerDependencies:
-      - supports-color
 
   '@putout/operator-regexp@1.0.0(putout@37.22.0(eslint@9.19.0(jiti@2.4.2))(typescript@5.7.3))':
     dependencies:
