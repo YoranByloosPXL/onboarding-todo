@@ -132,7 +132,7 @@
   "validation.too_small_number": "Moet groter dan of gelijk aan {count} zijn",
   "validation.too_small_string": "Moet minstens {count} teken bevatten | Moet minstens {count} tekens bevatten",
   "validation.unauthorized": "Ongeautoriseerd",
-  "module.todos.not_foudn": "Geen todos gevonden",
+  "module.todos.not_found": "Geen to do's gevonden",
   "module.todos.list.loading": "Laden...",
   "module.todos.page.title": "Mijn to do's",
   "module.todos.create.new.title": "Maak nieuwe todo aan",

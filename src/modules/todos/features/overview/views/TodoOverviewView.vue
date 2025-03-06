@@ -17,6 +17,8 @@ interface ApiError {
   status: number
 }
 
+const i18n = useI18n()
+
 const dialog = useDialog({
   component: () => import('@/modules/todos/features/overview/components/TodoCreateDialog.vue'),
 })
@@ -42,8 +44,6 @@ const error = computed<ApiError | null>(() => {
 
   return null
 })
-
-const i18n = useI18n()
 
 function onAddButtonClick(): void {
   void dialog.open()

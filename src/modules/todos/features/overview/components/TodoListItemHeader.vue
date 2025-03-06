@@ -57,9 +57,9 @@ function onDelete(): void {
       :checked="props.todo.completed"
       class="checkbox-todo"
     />
-    <h1 class="font-semibold text-lg flex-grow">
+    <h2 class="font-semibold text-lg flex-grow">
       {{ props.todo.title }}
-    </h1>
+    </h2>
     <VcDropdownMenu
       :popover-offset-in-px="0"
       :is-arrow-hidden="true"

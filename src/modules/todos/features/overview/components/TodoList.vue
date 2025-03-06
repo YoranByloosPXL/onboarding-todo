@@ -21,7 +21,7 @@ const hasTodos = computed<boolean>(() => props.todoList !== null && props.todoLi
   </h1>
   <p
     v-if="hasTodos === false"
-    class="m-lg text-center text-gray-500"
+    class="text-gray-500"
   >
     {{ i18n.t('module.todos.not_found') }}
   </p>
