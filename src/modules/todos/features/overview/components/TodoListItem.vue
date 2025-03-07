@@ -1,37 +1,65 @@
 <script setup lang="ts">
-import { VcCheckbox } from '@wisemen/vue-core'
+import {
+  useDialog,
+  useToast,
+} from '@wisemen/vue-core'
+import { useI18n } from 'vue-i18n'
 
-import { DateFormatUtil } from '@/utils/date.util'
+import { useApiErrorToast } from '@/composables/api-error-toast/apiErrorToast.composable.ts'
+import type { TodoIndex } from '@/models/todo/index/todoIndex.model'
+import { useTodoDeleteMutation } from '@/modules/todos/api/mutations/todoDelete.mutation'
+import TodoListItemContent from '@/modules/todos/features/overview/components/TodoListItemContent.vue'
+import TodoListItemHeader from '@/modules/todos/features/overview/components/TodoListItemHeader.vue'
 
 const props = defineProps<{
-  todo: {
-    uuid: string
-    title: string
-    completed: boolean
-    deadline: Date | null
-    description: string
-  }
+  todo: TodoIndex
 }>()
+
+const apiErrorToast = useApiErrorToast()
+const todoDeleteMutation = useTodoDeleteMutation()
+const toast = useToast()
+const i18n = useI18n()
+
+const dialog = useDialog({
+  component: () => import('@/modules/todos/features/overview/components/TodoUpdateDialog.vue'),
+})
+
+function onEditTodo(): void {
+  void dialog.open({ uuid: props.todo.uuid, todoIndex: props.todo })
+}
+
+async function onDelete(): Promise<void> {
+  try {
+    await todoDeleteMutation.execute({
+      body: props.todo.uuid,
+    })
+    toast.success({
+      durationInMs: 2500,
+      message: i18n.t('module.todos.delete.toast'),
+    })
+  }
+  catch (error) {
+    apiErrorToast.show(error)
+  }
+}
 </script>
 
 <template>
-  <li class="p-lg m-md bg-white shadow rounded-lg border border-gray-200 flex items-center justify-between mt-lg">
-    <div class="flex items-start gap-lg">
-      <VcCheckbox :checked="props.todo.completed" />
-      <div>
-        <h1 class="font-semibold text-lg">
-          {{ props.todo.title }}
-        </h1>
-        <p class="text-sm text-gray-500">
-          {{ props.todo.description }}
-        </p>
-
-        <div class="flex items-center text-sm text-gray-400 mt-sm">
-          <span :class="{ 'text-red-500': !props.todo.deadline }">
-            {{ props.todo.deadline ? DateFormatUtil.toLongDate(props.todo.deadline) : '' }}
-          </span>
-        </div>
-      </div>
-    </div>
+  <li class="p-lg bg-brand-primary-25 rounded-lg flex flex-col w-full">
+    <TodoListItemHeader
+      :todo="{
+        uuid: props.todo.uuid,
+        completed: props.todo.completed,
+        title: props.todo.title,
+      }"
+      @edit="onEditTodo"
+      @delete="onDelete"
+    />
+    <TodoListItemContent
+      :todo="{
+        description: props.todo.description,
+        deadline: props.todo.deadline,
+      }"
+    />
   </li>
 </template>

@@ -49,8 +49,6 @@ const isButtonDisabled = computed<boolean>(() => {
     :is-loading="props.form.isSubmitting.value"
     :keyboard-shortcut="KEYBOARD_SHORTCUT.SAVE"
     type="submit"
-    class="w-full"
-    size="sm"
   >
     {{ props.label }}
   </VcButton>
