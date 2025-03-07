@@ -17,6 +17,8 @@ interface ApiError {
   status: number
 }
 
+const i18n = useI18n()
+
 const dialog = useDialog({
   component: () => import('@/modules/todos/features/overview/components/TodoCreateDialog.vue'),
 })
@@ -43,15 +45,13 @@ const error = computed<ApiError | null>(() => {
   return null
 })
 
-const i18n = useI18n()
-
 function onAddButtonClick(): void {
-  void dialog.open({})
+  void dialog.open()
 }
 </script>
 
 <template>
-  <AppPage :title="i18n.t('module.todos.page.title')">
+  <AppPage>
     <p v-if="isLoading">
       {{ i18n.t('module.todos.list.loading') }}
     </p>
@@ -59,19 +59,14 @@ function onAddButtonClick(): void {
       v-else-if="error !== null"
       :error="error"
     />
-    <div
-      v-else
-      class="flex flex-col gap-lg flex-1"
-    >
-      <TodoList
-        :todo-list="todoIndexQuery.data.value?.data ?? []"
-        :is-loading="isLoading"
-        :error="error"
-      />
-    </div>
-    <div class="fixed bottom-6 right-6">
+    <TodoList
+      v-if="!isLoading"
+      :todo-list="todoIndexQuery.data.value?.data ?? []"
+      :is-loading="isLoading"
+      :error="error"
+    />
+    <div class="fixed bottom-5xl right-5xl">
       <VcIconButton
-        class="button-add"
         icon="plus"
         label="Add todo button"
         @click="onAddButtonClick()"

@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import {
-  VcDialogDescription,
   VcDialogTitle,
 } from '@wisemen/vue-core'
 
 const props = defineProps<{
   title: string
-  description: string
 }>()
 </script>
 
@@ -17,11 +15,5 @@ const props = defineProps<{
         {{ props.title }}
       </h1>
     </VcDialogTitle>
-
-    <VcDialogDescription>
-      <p class="mt-xl text-secondary">
-        {{ props.description }}
-      </p>
-    </VcDialogDescription>
   </div>
 </template>

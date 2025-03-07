@@ -5,7 +5,7 @@ import AppGroup from '@/components/app/AppGroup.vue'
 <template>
   <AppGroup
     justify="center"
-    class="mt-4xl"
+    class="mt-xl"
   >
     <slot />
   </AppGroup>

@@ -16,20 +16,24 @@ const hasTodos = computed<boolean>(() => props.todoList !== null && props.todoLi
 </script>
 
 <template>
+  <h1 class="text-xl font-bold mb-3xl">
+    {{ i18n.t('module.todos.page.title') }}
+  </h1>
   <p
     v-if="hasTodos === false"
-    class="m-lg text-center text-gray-500"
+    class="text-gray-500"
   >
     {{ i18n.t('module.todos.not_found') }}
   </p>
 
   <ul
     v-else
-    class="space-y-4"
+    class="w-full flex flex-col space-y-2"
   >
     <TodoListItem
       v-for="todo in todoList"
       :key="todo.uuid"
+      :todo-index="todo"
       :todo="todo"
     />
   </ul>

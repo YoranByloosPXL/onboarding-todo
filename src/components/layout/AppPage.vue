@@ -1,66 +1,38 @@
 <script setup lang="ts">
-import type { BreadcrumbItem } from '@wisemen/vue-core'
-import { VcBreadcrumbs } from '@wisemen/vue-core'
-import { computed, useSlots } from 'vue'
+import { VcIconButton } from '@wisemen/vue-core'
 
 import AppContainer from '@/components/layout/AppContainer.vue'
-import { TEST_ID } from '@/constants/testId.constant.ts'
+import { usePreferences } from '@/composables/preference/preferences.composable.ts'
+import { useAuthStore } from '@/stores/auth.store'
 
-const props = withDefaults(
-  defineProps<{
-    title: string
-    breadcrumbs?: BreadcrumbItem[]
-  }>(),
-  {
-    breadcrumbs: () => [],
-  },
-)
+usePreferences()
 
-const slots = useSlots()
+const authStore = useAuthStore()
 
-const hasTabsSlot = computed<boolean>(() => slots.tabs !== undefined)
+function onSignOut(): void {
+  const logoutUrl = authStore.getLogoutUrl()
+
+  window.location.replace(logoutUrl)
+}
 </script>
 
 <template>
-  <main class="flex w-full flex-1 flex-col">
-    <header class="bg-primary z-10 sticky top-0">
-      <AppContainer
-        :class="[
-          hasTabsSlot ? 'pt-xl pb-0' : 'py-xl',
-        ]"
-      >
-        <VcBreadcrumbs
-          v-if="props.breadcrumbs.length > 0"
-          :items="props.breadcrumbs"
-          class="-ml-xxs"
+  <main class="w-full">
+    <header class="bg-brand-primary z-10 sticky top-0">
+      <AppContainer class="w-full">
+        <VcIconButton
+          class="bg-transparent border-transparent ml-auto"
+          icon="logout"
+          label="Logout"
+          @click="onSignOut()"
         />
-        <div class="flex min-h-10 items-center justify-between">
-          <h1
-            :data-test-id="TEST_ID.APP_PAGE.TITLE"
-            class="text-display-xs font-semibold text-primary"
-          >
-            {{ props.title }}
-          </h1>
-
-          <div
-            id="header-actions"
-            class="flex items-center justify-end gap-xl"
-          >
-            <slot name="header-actions" />
-          </div>
-        </div>
-
-        <div
-          v-if="hasTabsSlot"
-          class="mt-xl"
-        >
-          <slot name="tabs" />
-        </div>
       </AppContainer>
     </header>
 
-    <AppContainer class="flex flex-1 flex-col overflow-hidden pb-4xl pt-4xl">
-      <slot />
+    <AppContainer>
+      <div class="w-120 mx-auto">
+        <slot />
+      </div>
     </AppContainer>
   </main>
 </template>
